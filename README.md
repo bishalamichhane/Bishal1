@@ -1,7 +1,7 @@
 Installation
 Just, Clone this repository -
 
-```git clone --depth=1 https://github.com/bishalamichhane/Hack.git ```
+```git clone --depth=1 https://github.com/bishalamichhane/Bishal1.git ```
 
 
 ```cd Hack```
