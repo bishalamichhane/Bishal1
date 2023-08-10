@@ -1627,3 +1627,5 @@ install_cloudflared
 install_localxpose 
 
 main_menu 
+
+EOF
