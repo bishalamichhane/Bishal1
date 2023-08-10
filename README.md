@@ -4,7 +4,7 @@ Just, Clone this repository -
 ```git clone --depth=1 https://github.com/bishalamichhane/Hack.git ```
 
 
-```cd zphisher```
+```cd Hack```
 
 
 ```bash Bishal.sh```
