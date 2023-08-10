@@ -19,7 +19,7 @@ Just, Clone this repository -
 
 
 
-```Bishal.sh```
+```bash Bishal.sh```
 
 
 
