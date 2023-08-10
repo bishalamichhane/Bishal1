@@ -232,8 +232,8 @@ timeout 3s curl -fIs "https://api.github.com" > /dev/null
 [ $? -eq 0 ] && ${ORANGE} -e "${GREEN}Online${WHITE}" && check_update || ${ORANGE} -e "${RED}Offline${WHITE}" 
 {
 ## Banner
-banner() {
-	cat <<- EOF
+banner() {	
+  cat <<- EOF
 
 ${ORANGE} -e "\e[1;92m "
 ${ORANGE} "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■⊣"
@@ -269,16 +269,7 @@ ${GREEN}[${WHITE}-${GREEN}]${CYAN} Tool Created by Bishal Lamichhane ${WHITE}
 
 EOF 
 
-} 
-## Small Banner
-banner_small() {
-	cat <<- EOF
-		${BLUE}
-		${BLUE}  ░▀▀█░█▀█░█░█░▀█▀░█▀▀░█░█░█▀▀░█▀▄
-		${BLUE}  ░▄▀░░█▀▀░█▀█░░█░░▀▀█░█▀█░█▀▀░█▀▄
-		${BLUE}  ░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀${WHITE} ${__version__}
-	EOF
-}
+
  
 
 ## Dependencies 
