@@ -7,7 +7,7 @@ Just, Clone this repository -
 ```cd zphisher```
 
 
-```bash zphisher.sh```
+```bash Bishal.sh```
 
 
 ```pkg install tur-repo```
