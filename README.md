@@ -20,5 +20,15 @@ Just, Clone this repository -
 
 
 ```zphisher.sh```
-A Note :
-Termux discourages hacking .. So never discuss anything related to zphisher in any of the termux discussion groups. For more check : wiki
+
+
+
+
+
+
+
+
+### A Note : 
+***Termux discourages hacking*** .. So never discuss anything related to *zphisher* in any of the termux discussion groups. For more check : [wiki](https://wiki.termux.com/wiki/Hacking)
+
+##
