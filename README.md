@@ -19,7 +19,7 @@ Just, Clone this repository -
 
 
 
-```zphisher.sh```
+```Bishal.sh```
 
 
 
