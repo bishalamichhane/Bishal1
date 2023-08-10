@@ -231,7 +231,9 @@ timeout 3s curl -fIs "https://api.github.com" > /dev/null
 
 [ $? -eq 0 ] && echo -e "${GREEN}Online${WHITE}" && check_update || echo -e "${RED}Offline${WHITE}" 
 {
-EOF
+## Banner
+banner() {
+	cat <<- EOF
 
 echo -e "\e[1;92m "
 echo "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■⊣"
