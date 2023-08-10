@@ -230,6 +230,8 @@ echo -ne "\n${GREEN}[${WHITE}+${GREEN}]${CYAN} Internet Status : "
 timeout 3s curl -fIs "https://api.github.com" > /dev/null 
 
 [ $? -eq 0 ] && echo -e "${GREEN}Online${WHITE}" && check_update || echo -e "${RED}Offline${WHITE}" 
+{
+EOF
 
 echo -e "\e[1;92m "
 echo "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■⊣"
@@ -262,26 +264,6 @@ echo -e "\e[1;92m"
 echo "   ⊢□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■□■■□■□■□■□■□■□■□■□■□■⊣"
 
 ${GREEN}[${WHITE}-${GREEN}]${CYAN} Tool Created by Bishal Lamichhane ${WHITE} 
-
-EOF 
-
-} 
-
- 
-
-## Small Banner 
-
-banner_small() { 
-
-cat <<- EOF 
-
-${BLUE} 
-
-${BLUE}  ░▀▀█░█▀█░█░█░▀█▀░█▀▀░█░█░█▀▀░█▀▄ 
-
-${BLUE}  ░▄▀░░█▀▀░█▀█░░█░░▀▀█░█▀█░█▀▀░█▀▄ 
-
-${BLUE}  ░▀▀▀░▀░░░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀░▀${WHITE} ${__version__} 
 
 EOF 
 
